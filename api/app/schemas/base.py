@@ -29,11 +29,11 @@ class IDMixin(BaseSchema):
 class BaseResponse(BaseSchema):
     """Базовая схема ответа"""
     success: bool = True
-    message: Optional[str] = None
+    message: str | None = None
 
 
 class ErrorResponse(BaseSchema):
     """Схема ошибки"""
     success: bool = False
     error: str
-    detail: Optional[str] = None
+    detail: str | None = None
