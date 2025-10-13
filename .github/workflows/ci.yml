@@ -34,8 +34,10 @@ jobs:
           poetry config virtualenvs.create false
       - name: Install deps
         run: poetry install --no-interaction --no-ansi
-      - name: Lint (Ruff)
-        run: poetry run ruff check api/
+      - name: Lint (Ruff fix)
+        run: |
+          poetry run ruff check --fix api/
+          poetry run ruff format api/
       - name: Tests (Pytest)
         env:
           PYTHONPATH: ${{ github.workspace }}/api:${{ env.PYTHONPATH }}
