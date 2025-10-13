@@ -1,0 +1,40 @@
+extends: default
+
+rules:
+  # Отступы
+  indentation:
+    spaces: 2
+    indent-sequences: true
+    check-multi-line-strings: false
+
+  # Длина строк
+  line-length:
+    max: 120
+    level: warning
+
+  # Пустые строки
+  empty-lines:
+    max: 2
+    max-start: 0
+    max-end: 1
+
+  # Кавычки
+  quoted-strings:
+    quote-type: single
+    check-keys: false
+
+  # Комментарии
+  comments:
+    min-spaces-from-content: 1
+
+  # Документы
+  document-start:
+    present: false
+
+  # Ключи
+  key-duplicates: enable
+  key-ordering: disable
+
+  # Значения
+  truthy:
+    allowed-values: ['true', 'false', 'on', 'off']

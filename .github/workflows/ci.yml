@@ -1,0 +1,47 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+permissions:
+  contents: read
+
+env:
+  PIP_CACHE_DIR: ${{ github.workspace }}/.cache/pip
+  POETRY_CACHE_DIR: ${{ github.workspace }}/.cache/poetry
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Cache pip/poetry
+        uses: actions/cache@v4
+        with:
+          path: |
+            .cache/pip
+            .cache/poetry
+          key: ${{ runner.os }}-py3.12-${{ hashFiles('**/pyproject.toml', '**/poetry.lock') }}
+      - name: Install Poetry
+        run: |
+          pip install poetry
+          poetry config virtualenvs.create false
+      - name: Install deps
+        run: poetry install --no-interaction --no-ansi
+      - name: Lint (Ruff fix)
+        run: |
+          poetry run ruff check --fix api/
+          poetry run ruff format api/
+      - name: Tests (Pytest)
+        env:
+          PYTHONPATH: ${{ github.workspace }}:${{ env.PYTHONPATH }}
+        run: |
+          poetry run pytest api/tests/ -q
+
+

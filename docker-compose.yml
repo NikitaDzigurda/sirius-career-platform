@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: sirius_career_mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: sirius_career
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    command: --default-authentication-plugin=mysql_native_password
+    networks:
+      - sirius_network
+
+  # Redis для кэширования и OTP (будущее использование)
+  # redis:
+  #   image: redis:7-alpine
+  #   container_name: sirius_career_redis
+  #   restart: unless-stopped
+  #   ports:
+  #     - "6379:6379"
+  #   volumes:
+  #     - redis_data:/data
+  #   networks:
+  #     - sirius_network
+
+volumes:
+  mysql_data:
+  # redis_data:
+
+networks:
+  sirius_network:
+    driver: bridge
