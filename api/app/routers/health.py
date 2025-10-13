@@ -2,7 +2,7 @@
 Роутер для проверки здоровья приложения
 """
 from fastapi import APIRouter
-from app.schemas.base import BaseResponse
+from api.app.schemas.base import BaseResponse
 
 router = APIRouter(prefix="/health", tags=["health"])
 
