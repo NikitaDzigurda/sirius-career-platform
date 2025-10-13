@@ -40,9 +40,8 @@ jobs:
           poetry run ruff format api/
       - name: Tests (Pytest)
         env:
-          PYTHONPATH: ${{ github.workspace }}/api:${{ env.PYTHONPATH }}
+          PYTHONPATH: ${{ github.workspace }}:${{ env.PYTHONPATH }}
         run: |
-          cd api
-          poetry run pytest tests/ -q
+          poetry run pytest api/tests/ -q
 
 
