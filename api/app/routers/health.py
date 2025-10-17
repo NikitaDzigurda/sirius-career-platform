@@ -24,7 +24,7 @@ async def readiness_check():
     Проверка готовности приложения
     """
     # Здесь можно добавить проверки БД, внешних сервисов и т.д.
-    return {"status": "ready"}
+    return {"status": "go!"}
 
 
 @router.get("/live")
