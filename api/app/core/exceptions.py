@@ -44,6 +44,32 @@ class VacancyNotFoundError(SiriusCareerException):
     pass
 
 
+# Admin domain exceptions
+class TestNotFoundException(SiriusCareerException):
+    """Тест не найден"""
+    pass
+
+
+class TestSlugAlreadyExistsException(SiriusCareerException):
+    """Тест с таким slug уже существует"""
+    pass
+
+
+class TestHasResultsException(SiriusCareerException):
+    """Нельзя удалить тест, у которого есть результаты"""
+    pass
+
+
+class InvalidQuestionConfigException(SiriusCareerException):
+    """Неверная конфигурация вопроса"""
+    pass
+
+
+class InvalidQuestionOrderException(SiriusCareerException):
+    """Неверный порядок вопросов"""
+    pass
+
+
 # HTTP исключения
 def raise_user_not_found():
     raise HTTPException(

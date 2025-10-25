@@ -7,6 +7,7 @@ from contextlib import asynccontextmanager
 
 from app.config import settings
 from app.routers import health
+from app.domains.admin.routers import router as admin_router
 
 
 @asynccontextmanager
@@ -40,6 +41,7 @@ app.add_middleware(
 
 # Подключение роутеров
 app.include_router(health.router)
+app.include_router(admin_router)
 
 
 @app.get("/")
